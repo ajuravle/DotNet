@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Cinemas" EntityType="Model1.Store.Cinemas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Movies" EntityType="Model1.Store.Movies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Actors" EntityType="Model1.Store.Actors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tickets" EntityType="Model1.Store.Tickets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ActorMovie" EntityType="Model1.Store.ActorMovie" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ActorMovie_Actor" Association="Model1.Store.FK_ActorMovie_Actor">
+      <End Role="Actor" EntitySet="Actors" />
+      <End Role="ActorMovie" EntitySet="ActorMovie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActorMovie_Movie" Association="Model1.Store.FK_ActorMovie_Movie">
+      <End Role="Movie" EntitySet="Movies" />
+      <End Role="ActorMovie" EntitySet="ActorMovie" />
+    </AssociationSet>
+    <AssociationSet Name="MovieTicket" Association="Model1.Store.MovieTicket">
+      <End Role="Movie" EntitySet="Movies" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="CinemaTicket" Association="Model1.Store.CinemaTicket">
+      <End Role="Cinema" EntitySet="Cinemas" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cinemas">
+    <Key>
+      <PropertyRef Name="CinemaId" />
+    </Key>
+    <Property Name="CinemaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NrRooms" Type="smallint" Nullable="false" />
+    <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Movies">
+    <Key>
+      <PropertyRef Name="MovieId" />
+    </Key>
+    <Property Name="MovieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Genre" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Duration" Type="smallint" Nullable="false" />
+    <Property Name="AgeRestriction" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="ActorId" />
+    </Key>
+    <Property Name="ActorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tickets">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="smallint" Nullable="false" />
+    <Property Name="MovieMovieId" Type="int" Nullable="false" />
+    <Property Name="CinemaCinemaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActorMovie">
+    <Key>
+      <PropertyRef Name="Actors_ActorId" />
+      <PropertyRef Name="Movies_MovieId" />
+    </Key>
+    <Property Name="Actors_ActorId" Type="int" Nullable="false" />
+    <Property Name="Movies_MovieId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="MovieTicket">
+    <End Role="Movie" Type="Model1.Store.Movies" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Ticket" Type="Model1.Store.Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="MovieId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="MovieMovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CinemaTicket">
+    <End Role="Cinema" Type="Model1.Store.Cinemas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Ticket" Type="Model1.Store.Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema">
+        <PropertyRef Name="CinemaId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="CinemaCinemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActorMovie_Actor">
+    <End Role="Actor" Type="Model1.Store.Actors" Multiplicity="1" />
+    <End Role="ActorMovie" Type="Model1.Store.ActorMovie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actor">
+        <PropertyRef Name="ActorId" />
+      </Principal>
+      <Dependent Role="ActorMovie">
+        <PropertyRef Name="Actors_ActorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActorMovie_Movie">
+    <End Role="ActorMovie" Type="Model1.Store.ActorMovie" Multiplicity="*" />
+    <End Role="Movie" Type="Model1.Store.Movies" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="MovieId" />
+      </Principal>
+      <Dependent Role="ActorMovie">
+        <PropertyRef Name="Movies_MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

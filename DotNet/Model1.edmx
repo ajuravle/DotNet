@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Cinemas" EntityType="Model1.Store.Cinemas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Movies" EntityType="Model1.Store.Movies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Actors" EntityType="Model1.Store.Actors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tickets" EntityType="Model1.Store.Tickets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ActorMovie" EntityType="Model1.Store.ActorMovie" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ActorMovie_Actor" Association="Model1.Store.FK_ActorMovie_Actor">
+      <End Role="Actor" EntitySet="Actors" />
+      <End Role="ActorMovie" EntitySet="ActorMovie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActorMovie_Movie" Association="Model1.Store.FK_ActorMovie_Movie">
+      <End Role="Movie" EntitySet="Movies" />
+      <End Role="ActorMovie" EntitySet="ActorMovie" />
+    </AssociationSet>
+    <AssociationSet Name="MovieTicket" Association="Model1.Store.MovieTicket">
+      <End Role="Movie" EntitySet="Movies" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="CinemaTicket" Association="Model1.Store.CinemaTicket">
+      <End Role="Cinema" EntitySet="Cinemas" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cinemas">
+    <Key>
+      <PropertyRef Name="CinemaId" />
+    </Key>
+    <Property Name="CinemaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NrRooms" Type="smallint" Nullable="false" />
+    <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Movies">
+    <Key>
+      <PropertyRef Name="MovieId" />
+    </Key>
+    <Property Name="MovieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Genre" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Duration" Type="smallint" Nullable="false" />
+    <Property Name="AgeRestriction" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="ActorId" />
+    </Key>
+    <Property Name="ActorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tickets">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="smallint" Nullable="false" />
+    <Property Name="MovieMovieId" Type="int" Nullable="false" />
+    <Property Name="CinemaCinemaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActorMovie">
+    <Key>
+      <PropertyRef Name="Actors_ActorId" />
+      <PropertyRef Name="Movies_MovieId" />
+    </Key>
+    <Property Name="Actors_ActorId" Type="int" Nullable="false" />
+    <Property Name="Movies_MovieId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="MovieTicket">
+    <End Role="Movie" Type="Model1.Store.Movies" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Ticket" Type="Model1.Store.Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="MovieId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="MovieMovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CinemaTicket">
+    <End Role="Cinema" Type="Model1.Store.Cinemas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Ticket" Type="Model1.Store.Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema">
+        <PropertyRef Name="CinemaId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="CinemaCinemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActorMovie_Actor">
+    <End Role="Actor" Type="Model1.Store.Actors" Multiplicity="1" />
+    <End Role="ActorMovie" Type="Model1.Store.ActorMovie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actor">
+        <PropertyRef Name="ActorId" />
+      </Principal>
+      <Dependent Role="ActorMovie">
+        <PropertyRef Name="Actors_ActorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActorMovie_Movie">
+    <End Role="ActorMovie" Type="Model1.Store.ActorMovie" Multiplicity="*" />
+    <End Role="Movie" Type="Model1.Store.Movies" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="MovieId" />
+      </Principal>
+      <Dependent Role="ActorMovie">
+        <PropertyRef Name="Movies_MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cinemas" EntityType="Model1.Cinema" />
+          <EntitySet Name="Movies" EntityType="Model1.Movie" />
+          <EntitySet Name="Actors" EntityType="Model1.Actor" />
+          <EntitySet Name="Tickets" EntityType="Model1.Ticket" />
+          <AssociationSet Name="ActorMovie" Association="Model1.ActorMovie">
+            <End Role="Actor" EntitySet="Actors" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="MovieTicket" Association="Model1.MovieTicket">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="CinemaTicket" Association="Model1.CinemaTicket">
+            <End Role="Cinema" EntitySet="Cinemas" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cinema">
+          <Key>
+            <PropertyRef Name="CinemaId" />
+          </Key>
+          <Property Name="CinemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NrRooms" Type="Int16" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="30" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" />
+          <NavigationProperty Name="Tickets" Relationship="Model1.CinemaTicket" FromRole="Cinema" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="30" />
+          <Property Name="Genre" Type="String" Nullable="false" MaxLength="30" />
+          <Property Name="Duration" Type="Int16" Nullable="false" />
+          <Property Name="AgeRestriction" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Actors" Relationship="Model1.ActorMovie" FromRole="Movie" ToRole="Actor" />
+          <NavigationProperty Name="Tickets" Relationship="Model1.MovieTicket" FromRole="Movie" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="Model1.ActorMovie" FromRole="Actor" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="TicketId" />
+          </Key>
+          <Property Name="TicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" />
+          <Property Name="Price" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Movie" Relationship="Model1.MovieTicket" FromRole="Ticket" ToRole="Movie" />
+          <Property Name="MovieMovieId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cinema" Relationship="Model1.CinemaTicket" FromRole="Ticket" ToRole="Cinema" />
+          <Property Name="CinemaCinemaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ActorMovie">
+          <End Type="Model1.Actor" Role="Actor" Multiplicity="*" >
+          </End>
+          <End Type="Model1.Movie" Role="Movie" Multiplicity="*" >
+          </End>
+        </Association>
+        <Association Name="MovieTicket">
+          <End Type="Model1.Movie" Role="Movie" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model1.Ticket" Role="Ticket" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="MovieMovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CinemaTicket">
+          <End Type="Model1.Cinema" Role="Cinema" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model1.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinema">
+              <PropertyRef Name="CinemaId" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="CinemaCinemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Cinemas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Cinema)">
+        <MappingFragment StoreEntitySet="Cinemas">
+          <ScalarProperty Name="CinemaId" ColumnName="CinemaId" />
+          <ScalarProperty Name="NrRooms" ColumnName="NrRooms" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Movie)">
+        <MappingFragment StoreEntitySet="Movies">
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="AgeRestriction" ColumnName="AgeRestriction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Actors">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Actor)">
+        <MappingFragment StoreEntitySet="Actors">
+          <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Ticket)">
+        <MappingFragment StoreEntitySet="Tickets">
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="MovieMovieId" ColumnName="MovieMovieId" />
+          <ScalarProperty Name="CinemaCinemaId" ColumnName="CinemaCinemaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ActorMovie" TypeName="Model1.ActorMovie" StoreEntitySet="ActorMovie">
+      <EndProperty Name="Actor">
+        <ScalarProperty Name="ActorId" ColumnName="Actors_ActorId" />
+      </EndProperty>
+      <EndProperty Name="Movie">
+        <ScalarProperty Name="MovieId" ColumnName="Movies_MovieId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

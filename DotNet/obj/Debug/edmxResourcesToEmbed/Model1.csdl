@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cinemas" EntityType="Model1.Cinema" />
+    <EntitySet Name="Movies" EntityType="Model1.Movie" />
+    <EntitySet Name="Actors" EntityType="Model1.Actor" />
+    <EntitySet Name="Tickets" EntityType="Model1.Ticket" />
+    <AssociationSet Name="ActorMovie" Association="Model1.ActorMovie">
+      <End Role="Actor" EntitySet="Actors" />
+      <End Role="Movie" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="MovieTicket" Association="Model1.MovieTicket">
+      <End Role="Movie" EntitySet="Movies" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="CinemaTicket" Association="Model1.CinemaTicket">
+      <End Role="Cinema" EntitySet="Cinemas" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cinema">
+    <Key>
+      <PropertyRef Name="CinemaId" />
+    </Key>
+    <Property Name="CinemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NrRooms" Type="Int16" Nullable="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="30" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="100" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" />
+    <NavigationProperty Name="Tickets" Relationship="Model1.CinemaTicket" FromRole="Cinema" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="MovieId" />
+    </Key>
+    <Property Name="MovieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="30" />
+    <Property Name="Genre" Type="String" Nullable="false" MaxLength="30" />
+    <Property Name="Duration" Type="Int16" Nullable="false" />
+    <Property Name="AgeRestriction" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Actors" Relationship="Model1.ActorMovie" FromRole="Movie" ToRole="Actor" />
+    <NavigationProperty Name="Tickets" Relationship="Model1.MovieTicket" FromRole="Movie" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="Actor">
+    <Key>
+      <PropertyRef Name="ActorId" />
+    </Key>
+    <Property Name="ActorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Movies" Relationship="Model1.ActorMovie" FromRole="Actor" ToRole="Movie" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" />
+    <Property Name="Price" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Movie" Relationship="Model1.MovieTicket" FromRole="Ticket" ToRole="Movie" />
+    <Property Name="MovieMovieId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cinema" Relationship="Model1.CinemaTicket" FromRole="Ticket" ToRole="Cinema" />
+    <Property Name="CinemaCinemaId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="ActorMovie">
+    <End Type="Model1.Actor" Role="Actor" Multiplicity="*" />
+    <End Type="Model1.Movie" Role="Movie" Multiplicity="*" />
+  </Association>
+  <Association Name="MovieTicket">
+    <End Type="Model1.Movie" Role="Movie" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Model1.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="MovieId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="MovieMovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CinemaTicket">
+    <End Type="Model1.Cinema" Role="Cinema" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Model1.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema">
+        <PropertyRef Name="CinemaId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="CinemaCinemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
