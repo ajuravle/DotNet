@@ -41,7 +41,7 @@ namespace DotNet.Repositories
             }
         }
 
-        public void Update(Ticket ticketU)
+        public Ticket Update(Ticket ticketU)
         {
             var ticket = context.Tickets.SingleOrDefault(t => t.TicketId == ticketU.TicketId);
             if (ticket != null)
@@ -54,6 +54,7 @@ namespace DotNet.Repositories
                 context.Entry(ticket).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
+            return ticket;
         }
 
     }

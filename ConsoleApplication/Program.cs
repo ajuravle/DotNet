@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ConsoleApplication.ServiceReference;
 using DotNet;
 
@@ -32,7 +33,7 @@ namespace ConsoleApplication
                         Delete();
                         break;
                     case 4:
-                        //Update();
+                        Update();
                         break;
                     case 5:
                         Environment.Exit(0);
@@ -329,7 +330,165 @@ namespace ConsoleApplication
                 default:
                     Console.WriteLine("Wrong table");
                     break;
+                
             }
+            client.Close();
+        }
+
+        static void Update()
+        {
+            int table = ChooseTable();
+            switch (table)
+            {
+                case 1:
+                    UpdateCinemas();
+                    break;
+                case 2:
+                    UpdateMovies();
+                    break;
+                case 3:
+                    UpdateActors();
+                    break;
+                default:
+                    Console.WriteLine("Wrong table");
+                    break;
+            }
+        }
+
+        static void UpdateCinemas()
+        {
+            int choice = -1;
+            MyServiceClient client = new MyServiceClient();
+            var items = client.GetCinemas();
+            Console.WriteLine("Id Name NrRooms City Address");
+            for (int i = 0; i < items.Length; i++)
+                Console.WriteLine("{0} {1} {2} {3} {4}", i, items[i].Name, items[i].NrRooms, items[i].City,
+                    items[i].Address);
+            while (choice < 0 || choice > items.Length - 1)
+            {
+                Console.WriteLine("Choose one: ");
+                choice = Convert.ToInt16(Console.ReadLine());
+            }
+
+            string name, city, address;
+            short nrRooms;
+            Console.WriteLine("Name (OLD: {0}): ", items[choice].Name);
+            name = Console.ReadLine();
+            Console.WriteLine("Number rooms: (OLD: {0})", items[choice].NrRooms);
+            nrRooms = Convert.ToInt16(Console.ReadLine());
+            Console.WriteLine("City: (OLD: {0})", items[choice].City);
+            city = Console.ReadLine();
+            Console.WriteLine("Address: (OLD: {0})", items[choice].Address);
+            address = Console.ReadLine();
+
+            Cinema cinema = items[choice];
+            cinema.Name = name;
+            cinema.NrRooms = nrRooms;
+            cinema.City = city;
+            cinema.Address = address;
+
+            client.UpdateCinema(cinema);
+
+        }
+
+        static void UpdateMovies()
+        {
+            int choice = -1;
+            MyServiceClient client = new MyServiceClient();
+            var items3 = client.GetMovies();
+            Console.WriteLine("Id Title Genre AgeRestriction");
+            for (int i = 0; i < items3.Length; i++)
+                Console.WriteLine("{0} {1} {2} {3}", i, items3[i].Title, items3[i].Genre, items3[i].AgeRestriction);
+            while (choice < 0 || choice > items3.Length - 1)
+            {
+                Console.WriteLine("Choose one: ");
+                choice = Convert.ToInt16(Console.ReadLine());
+            }
+
+            string title, genre;
+            short duration, ageRestriction, actor = -2;
+            Console.WriteLine("Title (OLD: {0}): ", items3[choice].Title);
+            title = Console.ReadLine();
+            Console.WriteLine("Genre (OLD: {0}): ", items3[choice].Genre);
+            genre = Console.ReadLine();
+            Console.WriteLine("Duration (OLD: {0}): ", items3[choice].Duration);
+            duration = Convert.ToInt16(Console.ReadLine());
+            Console.WriteLine("Age restrition (OLD: {0}): ", items3[choice].AgeRestriction);
+            ageRestriction = Convert.ToInt16(Console.ReadLine());
+
+            Movie movie = items3[choice];
+
+            movie.Title = title;
+            movie.Genre = genre;
+            movie.Duration = duration;
+            movie.AgeRestriction = ageRestriction;
+            movie.Actors = new List<Actor>();
+
+            Console.WriteLine("Actors: ");
+            var items = client.GetActors();
+            for (int i = 0; i < items.Length; i++)
+                Console.WriteLine(i + ". " + items[i].FirstName + " " + items[i].LastName);
+            while (actor != -1)
+            {
+                Console.WriteLine("Choose one or \"-1\" to save");
+                actor = Convert.ToInt16(Console.ReadLine());
+                if (actor >= 0 && actor < items.Length)
+                {
+                    movie.Actors.Add(items[actor]);
+                }
+            }
+            client.UpdateMovie(movie);
+        }
+
+        static void UpdateActors()
+        {
+            int choice = -1;
+            MyServiceClient client = new MyServiceClient();
+            var items4 = client.GetActors();
+            Console.WriteLine("Id FirstName LastName BirthDate");
+            for (int i = 0; i < items4.Length; i++)
+                Console.WriteLine("{0} {1} {2} {3}", i, items4[i].FirstName, items4[i].LastName,
+                    items4[i].BirthDate.ToString("dd/MM/yyyy"));
+            while (choice < 0 || choice > items4.Length - 1)
+            {
+                Console.WriteLine("Choose one: ");
+                choice = Convert.ToInt16(Console.ReadLine());
+            }
+
+            string firstName, lastName;
+            DateTime birthDate;
+            int movie = -2;
+            Console.WriteLine("First name (OLD: {0}): ", items4[choice].FirstName);
+            firstName = Console.ReadLine();
+            Console.WriteLine("Last name (OLD: {0}): ", items4[choice].LastName);
+            lastName = Console.ReadLine();
+            Console.WriteLine("Birth date (dd/mm/yyyy) (OLD: {0}): ",
+                items4[choice].BirthDate.ToString("dd/MM/yyyy"));
+            birthDate = Convert.ToDateTime(Console.ReadLine());
+
+            Actor actor = items4[choice];
+
+            actor.FirstName = firstName;
+            actor.LastName = lastName;
+            actor.BirthDate = birthDate;
+            actor.Movies = new List<Movie>();
+
+            Console.WriteLine("Movies: ");
+
+            var items = client.GetMovies();
+            for (int i = 0; i < items.Length; i++)
+                Console.WriteLine(i + ". " + items[i].Title);
+            while (movie != -1)
+            {
+                Console.WriteLine("Choose one or \"-1\" to save");
+                movie = Convert.ToInt16(Console.ReadLine());
+                if (movie >= 0 && movie < items.Length)
+                {
+                    actor.Movies.Add(items[movie]);
+                }
+            }
+            client.UpdateActor(actor);
+
         }
 
         static int ChooseTable()

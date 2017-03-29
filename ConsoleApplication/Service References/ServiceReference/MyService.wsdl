@@ -79,6 +79,30 @@
   <wsdl:message name="IMyService_DeleteTicket_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteTicketResponse" />
   </wsdl:message>
+  <wsdl:message name="IMyService_UpdateCinema_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCinema" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_UpdateCinema_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCinemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_UpdateMovie_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMovie" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_UpdateMovie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMovieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_UpdateActor_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateActor" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_UpdateActor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateActorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_UpdateTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTicket" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_UpdateTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTicketResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMyService">
     <wsdl:operation name="GetCinemas">
       <wsdl:input wsaw:Action="http://tempuri.org/IMyService/GetCinemas" message="tns:IMyService_GetCinemas_InputMessage" />
@@ -127,6 +151,22 @@
     <wsdl:operation name="DeleteTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IMyService/DeleteTicket" message="tns:IMyService_DeleteTicket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMyService/DeleteTicketResponse" message="tns:IMyService_DeleteTicket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCinema">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyService/UpdateCinema" message="tns:IMyService_UpdateCinema_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyService/UpdateCinemaResponse" message="tns:IMyService_UpdateCinema_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMovie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyService/UpdateMovie" message="tns:IMyService_UpdateMovie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyService/UpdateMovieResponse" message="tns:IMyService_UpdateMovie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateActor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyService/UpdateActor" message="tns:IMyService_UpdateActor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyService/UpdateActorResponse" message="tns:IMyService_UpdateActor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyService/UpdateTicket" message="tns:IMyService_UpdateTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyService/UpdateTicketResponse" message="tns:IMyService_UpdateTicket_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMyService" type="tns:IMyService">
@@ -232,6 +272,42 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteTicket">
       <soap:operation soapAction="http://tempuri.org/IMyService/DeleteTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCinema">
+      <soap:operation soapAction="http://tempuri.org/IMyService/UpdateCinema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMovie">
+      <soap:operation soapAction="http://tempuri.org/IMyService/UpdateMovie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateActor">
+      <soap:operation soapAction="http://tempuri.org/IMyService/UpdateActor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTicket">
+      <soap:operation soapAction="http://tempuri.org/IMyService/UpdateTicket" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

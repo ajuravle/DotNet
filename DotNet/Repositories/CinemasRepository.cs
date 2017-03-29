@@ -37,7 +37,7 @@ namespace DotNet.Repositories
             }
         }
 
-        public void Update(Cinema cinemaU)
+        public Cinema Update(Cinema cinemaU)
         {
             var cinema = context.Cinemas.SingleOrDefault(t => t.CinemaId == cinemaU.CinemaId);
             if (cinema != null)
@@ -49,6 +49,7 @@ namespace DotNet.Repositories
                 context.Entry(cinema).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
+            return cinema;
         }
     }
 }

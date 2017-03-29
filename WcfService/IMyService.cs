@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
 using DotNet;
 
 namespace WcfService
@@ -38,5 +34,14 @@ namespace WcfService
         void DeleteActor(Actor actor);
         [OperationContract]
         void DeleteTicket(Ticket ticket);
+
+        [OperationContract]
+        Cinema UpdateCinema(Cinema cinema);
+        [OperationContract]
+        Movie UpdateMovie(Movie movie);
+        [OperationContract]
+        Actor UpdateActor(Actor actor);
+        [OperationContract]
+        Ticket UpdateTicket(Ticket ticket);
     }
 }

@@ -7,4 +7,3 @@ c:\users\andre\documents\visual studio 2015\Projects\DotNet\DotNet\bin\Debug\Ent
 c:\users\andre\documents\visual studio 2015\Projects\DotNet\DotNet\bin\Debug\EntityFramework.SqlServer.xml
 c:\users\andre\documents\visual studio 2015\Projects\DotNet\DotNet\obj\Debug\DotNet.exe
 c:\users\andre\documents\visual studio 2015\Projects\DotNet\DotNet\obj\Debug\DotNet.pdb
-C:\Users\andre\documents\visual studio 2015\Projects\DotNet\DotNet\obj\Debug\DotNet.csprojResolveAssemblyReference.cache

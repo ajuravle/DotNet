@@ -51,7 +51,7 @@ namespace DotNet.Repositories
             }
         }
 
-        public void Update(Movie movieU)
+        public Movie Update(Movie movieU)
         {
             var movie = context.Movies.SingleOrDefault(t => t.MovieId == movieU.MovieId);
             if (movie != null)
@@ -60,7 +60,8 @@ namespace DotNet.Repositories
                 movie.Genre = movieU.Genre;
                 movie.Duration = movieU.Duration;
                 movie.AgeRestriction = movieU.AgeRestriction;
-                movie.Actors.Clear();
+                movie.Actors = new List<Actor>();
+                context.Database.ExecuteSqlCommand("DELETE FROM ActorMovie where Movies_MovieId=" + movie.MovieId.ToString());
                 foreach (var a in movieU.Actors)
                 {
                     var act = context.Actors.SingleOrDefault(e => e.ActorId == a.ActorId);
@@ -76,6 +77,7 @@ namespace DotNet.Repositories
                 context.Entry(movie).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
+            return movie;
         }
     }
 }

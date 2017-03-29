@@ -80,5 +80,29 @@ namespace WcfService
             var repo = new TicketsRepository();
             repo.Delete(ticket);
         }
+
+        public Cinema UpdateCinema(Cinema cinema)
+        {
+            var repo = new CinemasRepository();
+            return repo.Update(cinema);
+        }
+
+        public Movie UpdateMovie(Movie movie)
+        {
+            var repo = new MoviesRepository();
+            return repo.Update(movie);
+        }
+
+        public Actor UpdateActor(Actor actor)
+        {
+            var repo = new ActorsRepository();
+            return repo.Update(actor);
+        }
+
+        public Ticket UpdateTicket(Ticket ticket)
+        {
+            var repo = new TicketsRepository();
+            return repo.Update(ticket);
+        }
     }
 }

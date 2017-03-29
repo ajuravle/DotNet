@@ -86,6 +86,30 @@ namespace ConsoleApplication.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/DeleteTicket", ReplyAction="http://tempuri.org/IMyService/DeleteTicketResponse")]
         System.Threading.Tasks.Task DeleteTicketAsync(DotNet.Ticket ticket);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateCinema", ReplyAction="http://tempuri.org/IMyService/UpdateCinemaResponse")]
+        DotNet.Cinema UpdateCinema(DotNet.Cinema cinema);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateCinema", ReplyAction="http://tempuri.org/IMyService/UpdateCinemaResponse")]
+        System.Threading.Tasks.Task<DotNet.Cinema> UpdateCinemaAsync(DotNet.Cinema cinema);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateMovie", ReplyAction="http://tempuri.org/IMyService/UpdateMovieResponse")]
+        DotNet.Movie UpdateMovie(DotNet.Movie movie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateMovie", ReplyAction="http://tempuri.org/IMyService/UpdateMovieResponse")]
+        System.Threading.Tasks.Task<DotNet.Movie> UpdateMovieAsync(DotNet.Movie movie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateActor", ReplyAction="http://tempuri.org/IMyService/UpdateActorResponse")]
+        DotNet.Actor UpdateActor(DotNet.Actor actor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateActor", ReplyAction="http://tempuri.org/IMyService/UpdateActorResponse")]
+        System.Threading.Tasks.Task<DotNet.Actor> UpdateActorAsync(DotNet.Actor actor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateTicket", ReplyAction="http://tempuri.org/IMyService/UpdateTicketResponse")]
+        DotNet.Ticket UpdateTicket(DotNet.Ticket ticket);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateTicket", ReplyAction="http://tempuri.org/IMyService/UpdateTicketResponse")]
+        System.Threading.Tasks.Task<DotNet.Ticket> UpdateTicketAsync(DotNet.Ticket ticket);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -209,6 +233,38 @@ namespace ConsoleApplication.ServiceReference {
         
         public System.Threading.Tasks.Task DeleteTicketAsync(DotNet.Ticket ticket) {
             return base.Channel.DeleteTicketAsync(ticket);
+        }
+        
+        public DotNet.Cinema UpdateCinema(DotNet.Cinema cinema) {
+            return base.Channel.UpdateCinema(cinema);
+        }
+        
+        public System.Threading.Tasks.Task<DotNet.Cinema> UpdateCinemaAsync(DotNet.Cinema cinema) {
+            return base.Channel.UpdateCinemaAsync(cinema);
+        }
+        
+        public DotNet.Movie UpdateMovie(DotNet.Movie movie) {
+            return base.Channel.UpdateMovie(movie);
+        }
+        
+        public System.Threading.Tasks.Task<DotNet.Movie> UpdateMovieAsync(DotNet.Movie movie) {
+            return base.Channel.UpdateMovieAsync(movie);
+        }
+        
+        public DotNet.Actor UpdateActor(DotNet.Actor actor) {
+            return base.Channel.UpdateActor(actor);
+        }
+        
+        public System.Threading.Tasks.Task<DotNet.Actor> UpdateActorAsync(DotNet.Actor actor) {
+            return base.Channel.UpdateActorAsync(actor);
+        }
+        
+        public DotNet.Ticket UpdateTicket(DotNet.Ticket ticket) {
+            return base.Channel.UpdateTicket(ticket);
+        }
+        
+        public System.Threading.Tasks.Task<DotNet.Ticket> UpdateTicketAsync(DotNet.Ticket ticket) {
+            return base.Channel.UpdateTicketAsync(ticket);
         }
     }
 }
