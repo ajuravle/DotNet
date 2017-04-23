@@ -11,6 +11,7 @@ using System.Runtime.Serialization;
 
 namespace DotNet
 {
+    using System;
     using System.Collections.Generic;
 
     [DataContract]

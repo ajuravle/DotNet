@@ -1,0 +1,48 @@
+@model WebApplication.Models.Cinema
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cinema</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CinemaId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CinemaId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NrRooms)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NrRooms)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a href="@Url.Action("Edit", "Cinemas")/@Html.DisplayFor(model => model.CinemaId)">Edit</a> |
+    <a href="@Url.Action("Index", "Cinemas")">Back to List</a>
+</div>

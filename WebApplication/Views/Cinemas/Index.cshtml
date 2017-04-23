@@ -1,0 +1,50 @@
+@model IEnumerable<WebApplication.Models.Cinema>
+    
+@{
+    ViewData["Title"] = "Cinemas";
+}
+
+<h2>Cinemas</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Cinemas")">Create New</a> 
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CinemaId)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.City)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>@Html.DisplayNameFor(model => model.NrRooms)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CinemaId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NrRooms)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Cinemas")/@item.CinemaId">Edit</a> |
+                    <a href="@Url.Action("Details", "Cinemas")/@item.CinemaId">Details</a> |
+                    <a href="@Url.Action("Delete", "Cinemas")/@item.CinemaId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

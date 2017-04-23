@@ -1,0 +1,52 @@
+@model WebApplication.Models.Actor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Actor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ActorId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActorId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Movies)
+        </dt>
+        @for (int i=0;i< Model.Movies.Count; i++)
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Movies.ToList()[i].Title)
+            </dd>
+        }
+        
+    </dl>
+</div>
+<div>
+    <a href="@Url.Action("Edit", "Actors")/@Html.DisplayFor(model => model.ActorId)">Edit</a> |
+    <a href="@Url.Action("Index", "Actors")">Back to List</a>
+</div>

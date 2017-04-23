@@ -1,0 +1,46 @@
+@model IEnumerable<WebApplication.Models.Actor>
+    
+@{
+    ViewData["Title"] = "Actors";
+}
+
+<h2>Actors</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Actors")">Create New</a> 
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ActorId)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Actors")/@item.ActorId">Edit</a> |
+                    <a href="@Url.Action("Details", "Actors")/@item.ActorId">Details</a> |
+                    <a href="@Url.Action("Delete", "Actors")/@item.ActorId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
