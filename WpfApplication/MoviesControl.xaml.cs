@@ -102,5 +102,58 @@ namespace WpfApplication
                 Message.Content = "Invalid ID";
             }
         }
+
+        private void AddActor_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var movie = cl.GetMovies().SingleOrDefault(t => t.MovieId == Int16.Parse(MovieId.Text));
+                var actor = cl.GetActors().SingleOrDefault(t => t.ActorId == Int16.Parse(ActorId.Text));
+                if (movie == null)
+                    Message.Content = "Movie with this ID doesn't exist";
+                else if (actor == null)
+                    Message.Content = "Actor with this ID doesn't exist";
+                else
+                {
+                    cl.AddActorToMovie(movie,actor);
+                    System.Windows.Data.CollectionViewSource movieViewSource =
+                   (System.Windows.Data.CollectionViewSource)this.Resources["movieViewSource"];
+                    movieViewSource.Source = cl.GetMovies();
+                    Message.Content = "Movie updated";
+                }
+            }
+            catch (Exception)
+            {
+
+                Message.Content = "Invalid ID";
+            }
+        }
+
+        private void RemoveActor_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var movie = cl.GetMovies().SingleOrDefault(t => t.MovieId == Int16.Parse(MovieId.Text));
+                if (movie == null)
+                    Message.Content = "Movie with this ID doesn't exist";
+                else {
+                    var actor = movie.Actors.SingleOrDefault(t => t.ActorId == Int16.Parse(ActorId.Text));
+                    if (actor == null)
+                        Message.Content = "Actor with this ID doesn't exist";
+                    else
+                    {
+                        cl.RemoveActorFromMovie(movie, actor);
+                        System.Windows.Data.CollectionViewSource movieViewSource =
+                       (System.Windows.Data.CollectionViewSource)this.Resources["movieViewSource"];
+                        movieViewSource.Source = cl.GetMovies();
+                        Message.Content = "Movie updated";
+                    }}
+            }
+            catch (Exception)
+            {
+
+                Message.Content = "Invalid ID";
+            }
+        }
     }
 }

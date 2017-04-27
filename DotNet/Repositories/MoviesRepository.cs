@@ -84,11 +84,16 @@ namespace DotNet.Repositories
         {
             var movie = context.Movies.SingleOrDefault(t => t.MovieId == m.MovieId);
             var actor = context.Actors.SingleOrDefault(t => t.ActorId == a.ActorId);
+           
             if (movie!=null && actor != null)
             {
-                movie.Actors.Add(actor);
-                context.Entry(movie).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
+                var exist = movie.Actors.SingleOrDefault(t => t.ActorId == a.ActorId);
+                if (exist == null)
+                {
+                    movie.Actors.Add(actor);
+                    context.Entry(movie).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
             }
             return movie;
         }
@@ -96,10 +101,9 @@ namespace DotNet.Repositories
         public Movie RemoveActor(Movie m, Actor a)
         {
             var movie = context.Movies.SingleOrDefault(t => t.MovieId == m.MovieId);
-            var actor = movie.Actors.SingleOrDefault(t => t.ActorId == a.ActorId);
-            if (movie != null && actor != null)
+            if (movie != null)
             {
-                movie.Actors.Remove(actor);
+                context.Database.ExecuteSqlCommand("DELETE FROM ActorMovie where Movies_MovieId=" + m.MovieId.ToString()+ " and Actors_ActorId="+a.ActorId.ToString());
                 context.Entry(movie).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }

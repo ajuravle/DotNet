@@ -47,7 +47,11 @@
         <Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="325,200,0,0" VerticalAlignment="Top" Width="75" Click="Create_Click"/>
         <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="426,200,0,0" VerticalAlignment="Top" Width="75" Click="Update_Click"/>
         <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="523,200,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
-        <Label x:Name="Message"  HorizontalAlignment="Left" Margin="325,241,0,0" VerticalAlignment="Top" Width="273"/>
+        <Label x:Name="Message"  HorizontalAlignment="Left" Margin="325,280,0,0" VerticalAlignment="Top" Width="273"/>
+        <Label Content="Id movie:" HorizontalAlignment="Left" Margin="355,221,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="MovieId" HorizontalAlignment="Left" Height="23" Margin="450,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="AddMovie" Content="Add movie" HorizontalAlignment="Left" Margin="349,255,0,0" VerticalAlignment="Top" Width="75" Click="AddMovie_Click"  />
+        <Button x:Name="RemoveMovie" Content="Remove movie" HorizontalAlignment="Left" Margin="450,255,0,0" VerticalAlignment="Top" Width="75" Click="RemoveMovie_Click"  />
 
     </Grid>
 </UserControl>

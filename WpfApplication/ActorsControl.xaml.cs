@@ -99,5 +99,59 @@ namespace WpfApplication
                 Message.Content = "Invalid ID";
             }
         }
+
+        private void AddMovie_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var movie = cl.GetMovies().SingleOrDefault(t => t.MovieId == Int16.Parse(MovieId.Text));
+                var actor = cl.GetActors().SingleOrDefault(t => t.ActorId == Int16.Parse(ActorId.Text));
+                if (movie == null)
+                    Message.Content = "Movie with this ID doesn't exist";
+                else if (actor == null)
+                    Message.Content = "Actor with this ID doesn't exist";
+                else
+                {
+                    cl.AddMovieToActor(actor, movie);
+                    System.Windows.Data.CollectionViewSource actorViewSource =
+                     (System.Windows.Data.CollectionViewSource)this.Resources["actorViewSource"];
+                    actorViewSource.Source = cl.GetActors();
+                    Message.Content = "Actor updated";
+                }
+            }
+            catch (Exception)
+            {
+
+                Message.Content = "Invalid ID";
+            }
+        }
+
+        private void RemoveMovie_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var actor = cl.GetActors().SingleOrDefault(t => t.ActorId == Int16.Parse(ActorId.Text));
+                if (actor == null)
+                    Message.Content = "Actor with this ID doesn't exist";
+                else
+                {
+                    var movie = actor.Movies.SingleOrDefault(t => t.MovieId == Int16.Parse(MovieId.Text));
+                    if (movie == null)
+                        Message.Content = "Movie with this ID doesn't exist";
+                    else
+                    {
+                        cl.RemoveMovieFromActor(actor, movie);
+                       System.Windows.Data.CollectionViewSource actorViewSource =
+                        (System.Windows.Data.CollectionViewSource)this.Resources["actorViewSource"];
+                        actorViewSource.Source = cl.GetActors();
+                        Message.Content = "Actor updated";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Message.Content = "Invalid ID";
+            }
+        }
     }
 }

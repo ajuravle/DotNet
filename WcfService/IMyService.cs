@@ -43,5 +43,14 @@ namespace WcfService
         Actor UpdateActor(Actor actor);
         [OperationContract]
         Ticket UpdateTicket(Ticket ticket);
+
+        [OperationContract]
+        Movie AddActorToMovie(Movie movie,Actor actor);
+        [OperationContract]
+        Movie RemoveActorFromMovie(Movie movie, Actor actor);
+        [OperationContract]
+        Actor AddMovieToActor(Actor actor, Movie movie);
+        [OperationContract]
+        Actor RemoveMovieFromActor(Actor actor, Movie movie);
     }
 }

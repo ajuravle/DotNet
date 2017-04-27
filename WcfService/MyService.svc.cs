@@ -103,5 +103,29 @@ namespace WcfService
             var repo = new TicketsRepository();
             return repo.Update(ticket);
         }
+
+        public Movie AddActorToMovie(Movie movie, Actor actor)
+        {
+            var repo = new MoviesRepository();
+            return repo.AddActor(movie, actor);
+        }
+
+        public Movie RemoveActorFromMovie(Movie movie, Actor actor)
+        {
+            var repo = new MoviesRepository();
+            return repo.RemoveActor(movie, actor);
+        }
+
+        public Actor AddMovieToActor(Actor actor, Movie movie)
+        {
+            var repo = new ActorsRepository();
+            return repo.AddMovie(actor,movie);
+        }
+
+        public Actor RemoveMovieFromActor(Actor actor, Movie movie)
+        {
+            var repo = new ActorsRepository();
+            return repo.RemoveMovie(actor, movie);
+        }
     }
 }

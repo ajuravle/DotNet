@@ -110,6 +110,30 @@ namespace WpfApplication.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/UpdateTicket", ReplyAction="http://tempuri.org/IMyService/UpdateTicketResponse")]
         System.Threading.Tasks.Task<DotNet.Ticket> UpdateTicketAsync(DotNet.Ticket ticket);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/AddActorToMovie", ReplyAction="http://tempuri.org/IMyService/AddActorToMovieResponse")]
+        DotNet.Movie AddActorToMovie(DotNet.Movie movie, DotNet.Actor actor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/AddActorToMovie", ReplyAction="http://tempuri.org/IMyService/AddActorToMovieResponse")]
+        System.Threading.Tasks.Task<DotNet.Movie> AddActorToMovieAsync(DotNet.Movie movie, DotNet.Actor actor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/RemoveActorFromMovie", ReplyAction="http://tempuri.org/IMyService/RemoveActorFromMovieResponse")]
+        DotNet.Movie RemoveActorFromMovie(DotNet.Movie movie, DotNet.Actor actor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/RemoveActorFromMovie", ReplyAction="http://tempuri.org/IMyService/RemoveActorFromMovieResponse")]
+        System.Threading.Tasks.Task<DotNet.Movie> RemoveActorFromMovieAsync(DotNet.Movie movie, DotNet.Actor actor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/AddMovieToActor", ReplyAction="http://tempuri.org/IMyService/AddMovieToActorResponse")]
+        DotNet.Actor AddMovieToActor(DotNet.Actor actor, DotNet.Movie movie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/AddMovieToActor", ReplyAction="http://tempuri.org/IMyService/AddMovieToActorResponse")]
+        System.Threading.Tasks.Task<DotNet.Actor> AddMovieToActorAsync(DotNet.Actor actor, DotNet.Movie movie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/RemoveMovieFromActor", ReplyAction="http://tempuri.org/IMyService/RemoveMovieFromActorResponse")]
+        DotNet.Actor RemoveMovieFromActor(DotNet.Actor actor, DotNet.Movie movie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMyService/RemoveMovieFromActor", ReplyAction="http://tempuri.org/IMyService/RemoveMovieFromActorResponse")]
+        System.Threading.Tasks.Task<DotNet.Actor> RemoveMovieFromActorAsync(DotNet.Actor actor, DotNet.Movie movie);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -265,6 +289,38 @@ namespace WpfApplication.ServiceReference {
         
         public System.Threading.Tasks.Task<DotNet.Ticket> UpdateTicketAsync(DotNet.Ticket ticket) {
             return base.Channel.UpdateTicketAsync(ticket);
+        }
+        
+        public DotNet.Movie AddActorToMovie(DotNet.Movie movie, DotNet.Actor actor) {
+            return base.Channel.AddActorToMovie(movie, actor);
+        }
+        
+        public System.Threading.Tasks.Task<DotNet.Movie> AddActorToMovieAsync(DotNet.Movie movie, DotNet.Actor actor) {
+            return base.Channel.AddActorToMovieAsync(movie, actor);
+        }
+        
+        public DotNet.Movie RemoveActorFromMovie(DotNet.Movie movie, DotNet.Actor actor) {
+            return base.Channel.RemoveActorFromMovie(movie, actor);
+        }
+        
+        public System.Threading.Tasks.Task<DotNet.Movie> RemoveActorFromMovieAsync(DotNet.Movie movie, DotNet.Actor actor) {
+            return base.Channel.RemoveActorFromMovieAsync(movie, actor);
+        }
+        
+        public DotNet.Actor AddMovieToActor(DotNet.Actor actor, DotNet.Movie movie) {
+            return base.Channel.AddMovieToActor(actor, movie);
+        }
+        
+        public System.Threading.Tasks.Task<DotNet.Actor> AddMovieToActorAsync(DotNet.Actor actor, DotNet.Movie movie) {
+            return base.Channel.AddMovieToActorAsync(actor, movie);
+        }
+        
+        public DotNet.Actor RemoveMovieFromActor(DotNet.Actor actor, DotNet.Movie movie) {
+            return base.Channel.RemoveMovieFromActor(actor, movie);
+        }
+        
+        public System.Threading.Tasks.Task<DotNet.Actor> RemoveMovieFromActorAsync(DotNet.Actor actor, DotNet.Movie movie) {
+            return base.Channel.RemoveMovieFromActorAsync(actor, movie);
         }
     }
 }

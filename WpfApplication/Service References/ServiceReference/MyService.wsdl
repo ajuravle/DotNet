@@ -103,6 +103,30 @@
   <wsdl:message name="IMyService_UpdateTicket_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateTicketResponse" />
   </wsdl:message>
+  <wsdl:message name="IMyService_AddActorToMovie_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddActorToMovie" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_AddActorToMovie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddActorToMovieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_RemoveActorFromMovie_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveActorFromMovie" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_RemoveActorFromMovie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveActorFromMovieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_AddMovieToActor_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddMovieToActor" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_AddMovieToActor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddMovieToActorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_RemoveMovieFromActor_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveMovieFromActor" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_RemoveMovieFromActor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveMovieFromActorResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMyService">
     <wsdl:operation name="GetCinemas">
       <wsdl:input wsaw:Action="http://tempuri.org/IMyService/GetCinemas" message="tns:IMyService_GetCinemas_InputMessage" />
@@ -167,6 +191,22 @@
     <wsdl:operation name="UpdateTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IMyService/UpdateTicket" message="tns:IMyService_UpdateTicket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMyService/UpdateTicketResponse" message="tns:IMyService_UpdateTicket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddActorToMovie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyService/AddActorToMovie" message="tns:IMyService_AddActorToMovie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyService/AddActorToMovieResponse" message="tns:IMyService_AddActorToMovie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveActorFromMovie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyService/RemoveActorFromMovie" message="tns:IMyService_RemoveActorFromMovie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyService/RemoveActorFromMovieResponse" message="tns:IMyService_RemoveActorFromMovie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMovieToActor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyService/AddMovieToActor" message="tns:IMyService_AddMovieToActor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyService/AddMovieToActorResponse" message="tns:IMyService_AddMovieToActor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMovieFromActor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyService/RemoveMovieFromActor" message="tns:IMyService_RemoveMovieFromActor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyService/RemoveMovieFromActorResponse" message="tns:IMyService_RemoveMovieFromActor_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMyService" type="tns:IMyService">
@@ -308,6 +348,42 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateTicket">
       <soap:operation soapAction="http://tempuri.org/IMyService/UpdateTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddActorToMovie">
+      <soap:operation soapAction="http://tempuri.org/IMyService/AddActorToMovie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveActorFromMovie">
+      <soap:operation soapAction="http://tempuri.org/IMyService/RemoveActorFromMovie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMovieToActor">
+      <soap:operation soapAction="http://tempuri.org/IMyService/AddMovieToActor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMovieFromActor">
+      <soap:operation soapAction="http://tempuri.org/IMyService/RemoveMovieFromActor" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -209,4 +209,64 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddActorToMovie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="movie" nillable="true" type="q25:Movie" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="actor" nillable="true" type="q26:Actor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddActorToMovieResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="AddActorToMovieResult" nillable="true" type="q27:Movie" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveActorFromMovie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="movie" nillable="true" type="q28:Movie" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="actor" nillable="true" type="q29:Actor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveActorFromMovieResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="RemoveActorFromMovieResult" nillable="true" type="q30:Movie" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddMovieToActor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="actor" nillable="true" type="q31:Actor" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="movie" nillable="true" type="q32:Movie" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddMovieToActorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="AddMovieToActorResult" nillable="true" type="q33:Actor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveMovieFromActor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="actor" nillable="true" type="q34:Actor" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="movie" nillable="true" type="q35:Movie" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveMovieFromActorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/DotNet" minOccurs="0" name="RemoveMovieFromActorResult" nillable="true" type="q36:Actor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

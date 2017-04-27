@@ -46,9 +46,13 @@
         <TextBox x:Name="Duration" HorizontalAlignment="Left" Height="23" Margin="455,92,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="Genre" HorizontalAlignment="Left" Height="23" Margin="455,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="AgeRestr" HorizontalAlignment="Left" Height="23" Margin="455,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="325,200,0,0" VerticalAlignment="Top" Width="75" Click="Create_Click" />
-        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="426,200,0,0" VerticalAlignment="Top" Width="75" Click="Update_Click" />
-        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="523,200,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
-        <Label x:Name="Message"  HorizontalAlignment="Left" Margin="325,241,0,0" VerticalAlignment="Top" Width="273"/>
+        <Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="315,189,0,0" VerticalAlignment="Top" Width="75" Click="Create_Click" />
+        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="416,189,0,0" VerticalAlignment="Top" Width="75" Click="Update_Click" />
+        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="513,189,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
+        <Label x:Name="Message"  HorizontalAlignment="Left" Margin="325,280,0,0" VerticalAlignment="Top" Width="273"/>
+        <Label Content="Id actor:" HorizontalAlignment="Left" Margin="360,221,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ActorId" HorizontalAlignment="Left" Height="23" Margin="455,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="AddActor" Content="Add actor" HorizontalAlignment="Left" Margin="354,255,0,0" VerticalAlignment="Top" Width="75" Click="AddActor_Click" />
+        <Button x:Name="RemoveActor" Content="Remove actor" HorizontalAlignment="Left" Margin="455,255,0,0" VerticalAlignment="Top" Width="75" Click="RemoveActor_Click" />
     </Grid>
 </UserControl>
