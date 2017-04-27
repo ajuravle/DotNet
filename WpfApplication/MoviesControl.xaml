@@ -1,0 +1,54 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApplication"
+             xmlns:DotNet="clr-namespace:DotNet;assembly=DotNet" x:Class="WpfApplication.MoviesControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="597.674" Loaded="UserControl_Loaded_1">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="movieViewSource" d:DesignSource="{d:DesignInstance {x:Type DotNet:Movie}, CreateList=True}"/>
+        <CollectionViewSource x:Key="movieActorsViewSource" Source="{Binding Actors, Source={StaticResource movieViewSource}}"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource movieViewSource}">
+        <DataGrid x:Name="movieDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,0,0" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="171" Width="284">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="movieIdColumn" Width="SizeToHeader" Header="Movie Id" Binding="{Binding MovieId}"/>
+                <DataGridTextColumn x:Name="titleColumn" Width="SizeToHeader" Header="Title" Binding="{Binding Title}"/>
+                <DataGridTextColumn x:Name="durationColumn" Width="SizeToHeader" Header="Duration" Binding="{Binding Duration}"/>
+                <DataGridTextColumn x:Name="genreColumn" Width="SizeToHeader" Header="Genre" Binding="{Binding Genre}"/>
+                <DataGridTextColumn x:Name="ageRestrictionColumn" Width="SizeToHeader" Header="Age Restriction" Binding="{Binding AgeRestriction}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="actorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource movieActorsViewSource}}" Margin="10,186,0,10" RowDetailsVisibilityMode="VisibleWhenSelected" HorizontalAlignment="Left" Width="284">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="actorIdColumn" Binding="{Binding ActorId}" Header="Actor Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Id:" HorizontalAlignment="Left" Margin="354,26,0,0" VerticalAlignment="Top"/>
+        <Label Content="Title:" HorizontalAlignment="Left" Margin="354,57,0,0" VerticalAlignment="Top"/>
+        <Label Content="Duration:" HorizontalAlignment="Left" Margin="354,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="Genre:" HorizontalAlignment="Left" Margin="354,119,0,0" VerticalAlignment="Top"/>
+        <Label Content="Age restriction:" HorizontalAlignment="Left" Margin="354,150,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="MovieId" HorizontalAlignment="Left" Height="23" Margin="455,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Title" HorizontalAlignment="Left" Height="23" Margin="455,61,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Duration" HorizontalAlignment="Left" Height="23" Margin="455,92,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Genre" HorizontalAlignment="Left" Height="23" Margin="455,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="AgeRestr" HorizontalAlignment="Left" Height="23" Margin="455,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="325,200,0,0" VerticalAlignment="Top" Width="75" Click="Create_Click" />
+        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="426,200,0,0" VerticalAlignment="Top" Width="75" Click="Update_Click" />
+        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="523,200,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
+        <Label x:Name="Message"  HorizontalAlignment="Left" Margin="325,241,0,0" VerticalAlignment="Top" Width="273"/>
+    </Grid>
+</UserControl>

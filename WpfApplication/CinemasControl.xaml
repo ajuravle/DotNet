@@ -1,0 +1,38 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApplication"
+             xmlns:DotNet="clr-namespace:DotNet;assembly=DotNet" x:Class="WpfApplication.CinemasControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="597.674" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="cinemaViewSource" d:DesignSource="{d:DesignInstance {x:Type DotNet:Cinema}, CreateList=True}"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource cinemaViewSource}" Margin="0,0,-82,0">
+        <DataGrid x:Name="cinemaDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,10,0,10" RowDetailsVisibilityMode="VisibleWhenSelected" HorizontalAlignment="Left" Width="259">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="cinemaIdColumn" Binding="{Binding CinemaId}" Header="Cinema Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="cityColumn" Binding="{Binding City}" Header="City" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nrRoomsColumn" Binding="{Binding NrRooms}" Header="Nr Rooms" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Id:" HorizontalAlignment="Left" Margin="370,16,0,0" VerticalAlignment="Top"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="370,47,0,0" VerticalAlignment="Top"/>
+        <Label Content="City:" HorizontalAlignment="Left" Margin="370,78,0,0" VerticalAlignment="Top"/>
+        <Label Content="Address:" HorizontalAlignment="Left" Margin="370,109,0,0" VerticalAlignment="Top"/>
+        <Label Content="Nr. rooms:" HorizontalAlignment="Left" Margin="370,140,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CinemaID" HorizontalAlignment="Left" Height="23" Margin="471,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Height="23" Margin="471,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="City" HorizontalAlignment="Left" Height="23" Margin="471,82,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Address" HorizontalAlignment="Left" Height="23" Margin="471,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="NrRooms" HorizontalAlignment="Left" Height="23" Margin="471,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="341,190,0,0" VerticalAlignment="Top" Width="75" Click="Create_Click"/>
+        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="442,190,0,0" VerticalAlignment="Top" Width="75" Click="Update_Click"/>
+        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="539,190,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
+        <Label x:Name="Message"  HorizontalAlignment="Left" Margin="341,231,0,0" VerticalAlignment="Top" Width="273"/>
+    </Grid>
+</UserControl>

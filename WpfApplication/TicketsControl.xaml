@@ -1,0 +1,46 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApplication"
+             xmlns:DotNet="clr-namespace:DotNet;assembly=DotNet" x:Class="WpfApplication.TicketsControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="640" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="ticketViewSource" d:DesignSource="{d:DesignInstance {x:Type DotNet:Ticket}, CreateList=True}"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource ticketViewSource}">
+
+        <DataGrid x:Name="ticketDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,226,10" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" HorizontalAlignment="Left">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="ticketIdColumn" Width="SizeToHeader" Header="Ticket Id" Binding="{Binding TicketId}"/>
+                <DataGridTextColumn x:Name="cinemaCinemaIdColumn" Width="SizeToHeader" Header="Cinema Cinema Id" Binding="{Binding CinemaCinemaId}"/>
+                <DataGridTextColumn x:Name="movieMovieIdColumn" Width="SizeToHeader" Header="Movie Movie Id" Binding="{Binding MovieMovieId}"/>
+                <DataGridTextColumn x:Name="priceColumn" Width="SizeToHeader" Header="Price" Binding="{Binding Price}"/>
+                <DataGridTemplateColumn x:Name="dateTimeColumn" Width="SizeToHeader" Header="Date Time">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Id:" HorizontalAlignment="Left" Margin="390,27,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cinema Id:" HorizontalAlignment="Left" Margin="390,58,0,0" VerticalAlignment="Top"/>
+        <Label Content="Movie Id:" HorizontalAlignment="Left" Margin="390,89,0,0" VerticalAlignment="Top"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="390,120,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date time:" HorizontalAlignment="Left" Margin="390,151,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TicketId" HorizontalAlignment="Left" Height="23" Margin="491,31,-13,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Cinema" HorizontalAlignment="Left" Height="23" Margin="491,62,-13,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Movie" HorizontalAlignment="Left" Height="23" Margin="491,93,-13,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Price" HorizontalAlignment="Left" Height="23" Margin="491,124,-13,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Time" HorizontalAlignment="Left" Height="23" Margin="491,155,-13,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="405,201,0,0" VerticalAlignment="Top" Width="75" Click="Create_Click"/>
+        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="515,201,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
+        <Label x:Name="Message" HorizontalAlignment="Left" Margin="405,238,0,0" VerticalAlignment="Top" Width="229" Height="30"/>
+
+    </Grid>
+</UserControl>

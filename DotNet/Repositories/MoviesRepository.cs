@@ -79,5 +79,31 @@ namespace DotNet.Repositories
             }
             return movie;
         }
+
+        public Movie AddActor(Movie m, Actor a)
+        {
+            var movie = context.Movies.SingleOrDefault(t => t.MovieId == m.MovieId);
+            var actor = context.Actors.SingleOrDefault(t => t.ActorId == a.ActorId);
+            if (movie!=null && actor != null)
+            {
+                movie.Actors.Add(actor);
+                context.Entry(movie).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+            return movie;
+        }
+
+        public Movie RemoveActor(Movie m, Actor a)
+        {
+            var movie = context.Movies.SingleOrDefault(t => t.MovieId == m.MovieId);
+            var actor = movie.Actors.SingleOrDefault(t => t.ActorId == a.ActorId);
+            if (movie != null && actor != null)
+            {
+                movie.Actors.Remove(actor);
+                context.Entry(movie).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+            return movie;
+        }
     }
 }
